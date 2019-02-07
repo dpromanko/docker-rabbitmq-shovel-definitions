@@ -1,0 +1,105 @@
+{
+  "rabbit_version": "3.7.11",
+  "users": [
+    {
+      "name": "guest",
+      "password_hash": "KTDjB8nc30UwTQveVRjL8/qJ+lGBXwlNtkkvkhLOZs6621M0",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [],
+  "parameters": [
+    {
+      "value": {
+        "ack-mode": "on-confirm",
+        "dest-add-forward-headers": false,
+        "dest-exchange": "demo.2.exchange",
+        "dest-protocol": "amqp091",
+        "dest-uri": "amqp://",
+        "src-delete-after": "never",
+        "src-protocol": "amqp091",
+        "src-queue": "demo.1.queue",
+        "src-uri": "amqp://"
+      },
+      "vhost": "/",
+      "component": "shovel",
+      "name": "demo.shovel"
+    }
+  ],
+  "global_parameters": [
+    {
+      "name": "cluster_name",
+      "value": "rabbit@129582ce5a5e"
+    }
+  ],
+  "policies": [],
+  "queues": [
+    {
+      "name": "demo.2.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "demo.1.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "demo.2.exchange",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "demo.1.exchange",
+      "vhost": "/",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "demo.1.exchange",
+      "vhost": "/",
+      "destination": "demo.1.queue",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    },
+    {
+      "source": "demo.2.exchange",
+      "vhost": "/",
+      "destination": "demo.2.queue",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    }
+  ]
+}
